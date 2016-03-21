@@ -1,16 +1,21 @@
 <ion-navbar *navbar>
-  <ion-title>
-    Home
-  </ion-title>
+    <ion-title>Home</ion-title>
 </ion-navbar>
 
 <ion-content class="home">
-  <ion-card>
-    <ion-card-header>
-      Card Header
-    </ion-card-header>
-    <ion-card-content>
-      Hello World
-    </ion-card-content>
-  </ion-card>
+    <div padding>
+        <ion-item class="login-item">
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" [(ngModel)]="username"></ion-input>
+        </ion-item>
+        <ion-item class="login-item">
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+    </div>
+    <div padding>
+        <button primary block (click)="signIn()">Sign In</button>
+        <div text-center class="or-text">- OR -</div>
+        <button secondary block (click)="signUp()">Create account</button>
+    </div>
 </ion-content>
