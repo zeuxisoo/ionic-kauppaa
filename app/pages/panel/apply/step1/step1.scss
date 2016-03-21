@@ -1,0 +1,20 @@
+.panel-apply {
+    /* Overwrite existsing style */
+    .item {
+        padding-left: 0px;
+    }
+
+    /* custom self style */
+    .section-header {
+        font-size: 18px;
+        background: #FAFAFA;
+        border-top: 1px solid #dedede;
+        padding-top: 16px;
+    }
+
+    .property-ownership-header {
+        border-bottom: 0px;
+        padding-left: 0px;
+        padding-bottom: 10px;
+    }
+}

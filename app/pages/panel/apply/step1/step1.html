@@ -1,0 +1,120 @@
+<ion-content class="panel panel-apply">
+    <ion-list>
+        <ion-list-header class="section-header">Personal information</ion-list-header>
+        <div padding>
+            <ion-item>
+                <ion-label stacked>Chinese name</ion-label>
+                <ion-input name="chinese_name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>English name</ion-label>
+                <ion-input name="english_name"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>HKID</ion-label>
+                <ion-input name="hkid"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Gender</ion-label>
+                <ion-select [(ngModel)]="gender">
+                    <ion-option value="1" checked="true">Male</ion-option>
+                    <ion-option value="2">Female</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Occupation</ion-label>
+                <ion-select [(ngModel)]="occupation">
+                    <ion-option value="1" checked="true">Teacher</ion-option>
+                    <ion-option value="2">Designer</ion-option>
+                    <ion-option value="3">Sale</ion-option>
+                    <ion-option value="4">Clerk</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Monthly Income</ion-label>
+                <ion-input name="monthly_income" type="number"></ion-input>
+            </ion-item>
+            <ion-list>
+                <ion-list-header class="property-ownership-header">Property Ownership</ion-list-header>
+                <ion-item>
+                    <ion-label stacked>private residential</ion-label>
+                    <ion-checkbox checked="true"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked>Home ownership</ion-label>
+                    <ion-checkbox checked="true"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked>Public home ownership</ion-label>
+                    <ion-checkbox checked="true"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked>village houses</ion-label>
+                    <ion-checkbox checked="true"></ion-checkbox>
+                </ion-item>
+                <ion-item>
+                    <ion-label stacked>No property</ion-label>
+                    <ion-checkbox checked="true"></ion-checkbox>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header class="section-header">Loan information</ion-list-header>
+        <div padding>
+            <ion-item>
+                <ion-label>Loan Type</ion-label>
+                <ion-select [(ngModel)]="loan_type">
+                    <ion-option value="1" checked="true">Type 1</ion-option>
+                    <ion-option value="2">Type 2</ion-option>
+                    <ion-option value="3">Type 3</ion-option>
+                    <ion-option value="4">Type 4</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Apply amount</ion-label>
+                <ion-input name="apply_amount" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Loan period</ion-label>
+                <ion-input name="loan_period" type="number"></ion-input>
+            </ion-item>
+        </div>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header class="section-header">Others</ion-list-header>
+        <div padding>
+            <ion-item>
+                <ion-label>Pay roll</ion-label>
+                <ion-select [(ngModel)]="payroll">
+                    <ion-option value="1" checked="true">Auto pay</ion-option>
+                    <ion-option value="2">Check</ion-option>
+                    <ion-option value="3">Cash</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>MPF</ion-label>
+                <ion-select [(ngModel)]="payroll">
+                    <ion-option value="1" checked="true">Yes</ion-option>
+                    <ion-option value="2">No</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label>Once bankruptcy</ion-label>
+                <ion-select [(ngModel)]="payroll">
+                    <ion-option value="1">Yes</ion-option>
+                    <ion-option value="2" checked="true">No</ion-option>
+                </ion-select>
+            </ion-item>
+        </div>
+    </ion-list>
+
+    <div padding>
+        <button full dark (click)="step2()">
+            Next step
+            <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+    </div>
+</ion-content>

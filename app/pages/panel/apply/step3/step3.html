@@ -1,0 +1,46 @@
+<ion-content class="panel panel-apply">
+    <ion-list>
+        <ion-list-header class="section-header">Debt record</ion-list-header>
+        <div padding>
+            <ion-item>
+                <ion-label stacked>Debt (Bank)</ion-label>
+                <ion-input name="debt_bank"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Debt type</ion-label>
+                <ion-select [(ngModel)]="debt_type">
+                    <ion-option value="1" checked="true">Type 1</ion-option>
+                    <ion-option value="2">Type 2</ion-option>
+                    <ion-option value="2">Type 3</ion-option>
+                    <ion-option value="2">Type 4</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Loan amount</ion-label>
+                <ion-input name="loan_amount" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Loan period</ion-label>
+                <ion-input name="loan_period" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Monthly repayment</ion-label>
+                <ion-input name="monthly_repayment" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Remain period</ion-label>
+                <ion-input name="remain_period" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Remain amount</ion-label>
+                <ion-input name="remain_amount" type="number"></ion-input>
+            </ion-item>
+        </div>
+    </ion-list>
+
+    <div padding>
+        <button full dark (click)="submit()">
+            Submit
+        </button>
+    </div>
+</ion-content>

@@ -1,4 +1,5 @@
 import { Page } from 'ionic-angular';
+import { PanelApplyStep1Page } from './step1/step1';
 
 @Page({
     templateUrl: 'build/pages/panel/apply/apply.html'
@@ -6,7 +7,11 @@ import { Page } from 'ionic-angular';
 export class PanelApplyPage {
 
     constructor() {
+        this.rootPage = PanelApplyStep1Page;
+    }
 
+    trash() {
+        console.log('trash clicked');
     }
 
 }

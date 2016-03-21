@@ -23,7 +23,7 @@ export class HomePage {
         console.log(this.username);
         console.log(this.password);
 
-        this.nav.push(PanelPage);
+        this.nav.setRoot(PanelPage);
     }
 
     signUp(event) {

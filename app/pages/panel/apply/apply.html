@@ -1,7 +1,12 @@
 <ion-navbar *navbar>
     <ion-title>Kauppaa</ion-title>
+    <ion-buttons end>
+        <button (click)="trash()">
+            <ion-icon name="md-trash"></ion-icon>
+        </button>
+    </ion-buttons>
 </ion-navbar>
 
-<ion-content padding>
-    This is apply page
+<ion-content class="panel panel-apply">
+    <ion-nav [root]="rootPage"></ion-nav>
 </ion-content>
