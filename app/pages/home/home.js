@@ -1,6 +1,7 @@
 import { NavController } from 'ionic-angular';
 import { Page } from 'ionic-angular';
 import { SignUpPage } from '../signup/signup';
+import { PanelPage } from '../panel/panel';
 
 @Page({
     templateUrl: 'build/pages/home/home.html'
@@ -21,6 +22,8 @@ export class HomePage {
         console.log('signIn Called');
         console.log(this.username);
         console.log(this.password);
+
+        this.nav.push(PanelPage);
     }
 
     signUp(event) {
