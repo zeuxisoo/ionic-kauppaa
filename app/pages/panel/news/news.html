@@ -2,6 +2,13 @@
     <ion-title>Kauppaa</ion-title>
 </ion-navbar>
 
-<ion-content padding>
-    This is news page
+<ion-content class="panel panel-news">
+    <ion-card *ngFor="#row of news; #i = index">
+        <ion-card-header>
+            <strong>{{ row.title }}</strong>
+        </ion-card-header>
+        <ion-card-content class="text-muted">
+            {{ row.content }}
+        </ion-card-content>
+    </ion-card>
 </ion-content>
