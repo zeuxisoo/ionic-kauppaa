@@ -1,5 +1,6 @@
 import { NavController } from 'ionic-angular';
 import { Page } from 'ionic-angular';
+import { SignUpPage } from '../signup/signup';
 
 @Page({
     templateUrl: 'build/pages/home/home.html'
@@ -23,7 +24,7 @@ export class HomePage {
     }
 
     signUp(event) {
-
+        this.nav.push(SignUpPage);
     }
 
 }
