@@ -1,10 +1,20 @@
 import querystring from 'querystring';
 
-import { Headers } from 'angular2/http';
+import { Http, Headers } from 'angular2/http';
+import { Injectable } from 'angular2/core';
 
-export default class {
+@Injectable()
+export class ApiService {
 
-    constructor() {
+    static get parameters() {
+        return [
+            [Http]
+        ];
+    }
+
+    constructor(http) {
+        this.http = http;
+
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/x-www-form-urlencoded');
     }
@@ -13,8 +23,16 @@ export default class {
         return `http://localhost:8000/api/v1/${entryPoint}`;
     }
 
-    querystring(dict) {
+    queryString(dict) {
         return querystring.stringify(dict);
+    }
+
+    post(entryPoint, data) {
+        return this.http
+                .post(this.api(entryPoint), this.queryString(data), {
+                    headers: this.headers
+                })
+                .map(response => response.json())
     }
 
 }

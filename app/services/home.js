@@ -1,37 +1,27 @@
 import 'rxjs/add/operator/map';
 
-import ApiService from './api';
-
 import { Injectable } from 'angular2/core';
-import { Http, Headers } from 'angular2/http';
+import { ApiService } from './api';
 
 @Injectable()
-export class HomeService extends ApiService {
+export class HomeService {
 
     static get parameters() {
         return [
-            [Http]
+            [ApiService]
         ];
     }
 
-    constructor(http) {
-        super();
-
-        this.http = http;
+    constructor(apiService) {
+        this.apiService = apiService;
     }
 
     signUp(username, email, password) {
-        let data = this.querystring({
+        return this.apiService.post("home/signup", {
             username: username,
             email   : email,
             password: password,
         });
-
-        return this.http
-                .post(this.api("home/signup"), data, {
-                    headers: this.headers
-                })
-                .map(response => response.json())
     }
 
 }
