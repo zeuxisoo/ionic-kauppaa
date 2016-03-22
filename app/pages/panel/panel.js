@@ -1,8 +1,8 @@
 import { Platform } from 'ionic-angular';
 import { Page } from 'ionic-angular';
-import { PanelNewsPage } from './news/news';
-import { PanelApplyPage } from './apply/apply';
-import { PanelAboutPage } from './about/about';
+import { PanelNewsPage } from '../panel-news/news';
+import { PanelApplyPage } from '../panel-apply/apply';
+import { PanelAboutPage } from '../panel-about/about';
 
 @Page({
     templateUrl: 'build/pages/panel/panel.html'

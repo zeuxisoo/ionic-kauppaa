@@ -3,7 +3,7 @@ import { Page } from 'ionic-angular';
 import { PanelApplyStep3Page } from '../step3/step3';
 
 @Page({
-    templateUrl: 'build/pages/panel/apply/step2/step2.html'
+    templateUrl: 'build/pages/panel-apply/step2/step2.html'
 })
 export class PanelApplyStep2Page {
 
