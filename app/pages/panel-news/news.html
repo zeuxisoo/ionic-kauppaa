@@ -3,6 +3,8 @@
 </ion-navbar>
 
 <ion-content class="panel panel-news">
+    <spinner class="middle center" *ngIf="news.length <= 0"></spinner>
+
     <ion-card *ngFor="#row of news; #i = index">
         <ion-card-header>
             <strong>{{ row.title }}</strong>
