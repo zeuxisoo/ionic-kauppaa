@@ -4,15 +4,15 @@
         <div padding>
             <ion-item>
                 <ion-label stacked>Chinese name</ion-label>
-                <ion-input name="chinese_name"></ion-input>
+                <ion-input name="chinese_name" [(ngModel)]="chinese_name"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>English name</ion-label>
-                <ion-input name="english_name"></ion-input>
+                <ion-input name="english_name" [(ngModel)]="english_name"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>HKID</ion-label>
-                <ion-input name="hkid"></ion-input>
+                <ion-input name="hkid" [(ngModel)]="hkid"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Gender</ion-label>
@@ -32,29 +32,29 @@
             </ion-item>
             <ion-item>
                 <ion-label stacked>Monthly Income</ion-label>
-                <ion-input name="monthly_income" type="number"></ion-input>
+                <ion-input name="monthly_income" type="number" [(ngModel)]="monthly_income"></ion-input>
             </ion-item>
             <ion-list>
                 <ion-list-header class="property-ownership-header">Property Ownership</ion-list-header>
                 <ion-item>
                     <ion-label stacked>private residential</ion-label>
-                    <ion-checkbox checked="true"></ion-checkbox>
+                    <ion-checkbox checked="false" [(ngModel)]="property_ownership_1"></ion-checkbox>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>Home ownership</ion-label>
-                    <ion-checkbox checked="true"></ion-checkbox>
+                    <ion-checkbox checked="false" [(ngModel)]="property_ownership_2"></ion-checkbox>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>Public home ownership</ion-label>
-                    <ion-checkbox checked="true"></ion-checkbox>
+                    <ion-checkbox checked="false" [(ngModel)]="property_ownership_3"></ion-checkbox>
                 </ion-item>
                 <ion-item>
-                    <ion-label stacked>village houses</ion-label>
-                    <ion-checkbox checked="true"></ion-checkbox>
+                    <ion-label stacked>Village houses</ion-label>
+                    <ion-checkbox checked="false" [(ngModel)]="property_ownership_4"></ion-checkbox>
                 </ion-item>
                 <ion-item>
                     <ion-label stacked>No property</ion-label>
-                    <ion-checkbox checked="true"></ion-checkbox>
+                    <ion-checkbox checked="false" [(ngModel)]="property_ownership_5"></ion-checkbox>
                 </ion-item>
             </ion-list>
         </div>
@@ -74,11 +74,11 @@
             </ion-item>
             <ion-item>
                 <ion-label stacked>Apply amount</ion-label>
-                <ion-input name="apply_amount" type="number"></ion-input>
+                <ion-input name="apply_amount" type="number" [(ngModel)]="apply_amount"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Loan period</ion-label>
-                <ion-input name="loan_period" type="number"></ion-input>
+                <ion-input name="loan_period" type="number" [(ngModel)]="loan_period"></ion-input>
             </ion-item>
         </div>
     </ion-list>
@@ -96,14 +96,14 @@
             </ion-item>
             <ion-item>
                 <ion-label>MPF</ion-label>
-                <ion-select [(ngModel)]="payroll">
+                <ion-select [(ngModel)]="mpf">
                     <ion-option value="1" checked="true">Yes</ion-option>
                     <ion-option value="2">No</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label>Once bankruptcy</ion-label>
-                <ion-select [(ngModel)]="payroll">
+                <ion-select [(ngModel)]="once_bankruptcy">
                     <ion-option value="1">Yes</ion-option>
                     <ion-option value="2" checked="true">No</ion-option>
                 </ion-select>

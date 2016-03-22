@@ -5,10 +5,11 @@ import { HomeService } from './services/home';
 import { NewsService } from './services/news';
 import { UtilsFactory } from './factories/utils';
 import { StorageFactory } from './factories/storage';
+import { StepDataFactory } from './factories/data';
 
 @App({
     template: '<ion-nav [root]="rootPage"></ion-nav>',
-    providers: [ApiService, HomeService, NewsService, UtilsFactory, StorageFactory],
+    providers: [ApiService, HomeService, NewsService, UtilsFactory, StorageFactory, StepDataFactory],
     config: {
         tabbarPlacement: 'bottom'
     } // http://ionicframework.com/docs/v2/api/config/Config/
