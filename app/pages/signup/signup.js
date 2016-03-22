@@ -1,6 +1,6 @@
 import { Page, Alert, NavController } from 'ionic-angular';
 import { HomeService } from '../../services/home';
-import { UtilsFactories } from '../../factories/utils';
+import { UtilsFactory } from '../../factories/utils';
 
 @Page({
     templateUrl: 'build/pages/signup/signup.html'
@@ -11,14 +11,14 @@ export class SignUpPage {
         return [
             [NavController],
             [HomeService],
-            [UtilsFactories]
+            [UtilsFactory]
         ];
     }
 
-    constructor(nav, homeService, utilsFactories) {
+    constructor(nav, homeService, utilsFactory) {
         this.nav            = nav;
         this.homeService    = homeService;
-        this.utilsFactories = utilsFactories;
+        this.utilsFactory = utilsFactory;
     }
 
     create(event) {
@@ -44,7 +44,7 @@ export class SignUpPage {
                     }
                 },
                 error => {
-                    let firstError = this.utilsFactories.firstError(error);
+                    let firstError = this.utilsFactory.firstError(error);
 
                     if (firstError !== "") {
                         let alert = Alert.create({

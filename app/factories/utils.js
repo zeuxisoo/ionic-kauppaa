@@ -1,7 +1,7 @@
 import { Injectable } from 'angular2/core';
 
 @Injectable()
-export class UtilsFactories {
+export class UtilsFactory {
 
     firstError(error) {
         let body       = JSON.parse(error._body);

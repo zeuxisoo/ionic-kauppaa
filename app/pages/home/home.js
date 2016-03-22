@@ -3,7 +3,7 @@ import { Page, Alert } from 'ionic-angular';
 import { SignUpPage } from '../signup/signup';
 import { PanelPage } from '../panel/panel';
 import { HomeService } from '../../services/home';
-import { UtilsFactories } from '../../factories/utils';
+import { UtilsFactory } from '../../factories/utils';
 
 @Page({
     templateUrl: 'build/pages/home/home.html'
@@ -14,14 +14,14 @@ export class HomePage {
         return [
             [NavController],
             [HomeService],
-            [UtilsFactories]
+            [UtilsFactory]
         ];
     }
 
-    constructor(nav, homeService, utilsFactories) {
+    constructor(nav, homeService, utilsFactory) {
         this.nav            = nav;
         this.homeService    = homeService;
-        this.utilsFactories = utilsFactories;
+        this.utilsFactory = utilsFactory;
     }
 
     signIn(event) {
@@ -38,8 +38,8 @@ export class HomePage {
                     }
                 },
                 error => {
-                    let firstError  = this.utilsFactories.firstError(error);
-                    let singleError = this.utilsFactories.singleError(error);
+                    let firstError  = this.utilsFactory.firstError(error);
+                    let singleError = this.utilsFactory.singleError(error);
                     let message     = "";
 
                     if (firstError !== "") {
