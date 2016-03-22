@@ -1,7 +1,9 @@
 import { NavController } from 'ionic-angular';
-import { Page } from 'ionic-angular';
+import { Page, Alert } from 'ionic-angular';
 import { SignUpPage } from '../signup/signup';
 import { PanelPage } from '../panel/panel';
+import { HomeService } from '../../services/home';
+import { UtilsFactories } from '../../factories/utils';
 
 @Page({
     templateUrl: 'build/pages/home/home.html'
@@ -10,20 +12,53 @@ export class HomePage {
 
     static get parameters() {
         return [
-            [NavController]
+            [NavController],
+            [HomeService],
+            [UtilsFactories]
         ];
     }
 
-    constructor(nav) {
-        this.nav = nav;
+    constructor(nav, homeService, utilsFactories) {
+        this.nav            = nav;
+        this.homeService    = homeService;
+        this.utilsFactories = utilsFactories;
     }
 
     signIn(event) {
-        console.log('signIn Called');
-        console.log(this.username);
-        console.log(this.password);
+        this.homeService
+            .signIn(this.username, this.password)
+            .subscribe(
+                response => {
+                    let token = response.token;
 
-        this.nav.setRoot(PanelPage);
+                    if (token) {
+                        localStorage.setItem('token', token);
+
+                        this.nav.setRoot(PanelPage);
+                    }
+                },
+                error => {
+                    let firstError  = this.utilsFactories.firstError(error);
+                    let singleError = this.utilsFactories.singleError(error);
+                    let message     = "";
+
+                    if (firstError !== "") {
+                        message = firstError;
+                    }else{
+                        message = singleError;
+                    }
+
+                    if (message !== "") {
+                        let alert = Alert.create({
+                            title  : 'Oops',
+                            message: message,
+                            buttons: ['Ok']
+                        });
+
+                        this.nav.present(alert);
+                    }
+                }
+            );
     }
 
     signUp(event) {

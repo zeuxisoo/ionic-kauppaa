@@ -17,4 +17,17 @@ export class UtilsFactories {
         return firstError;
     }
 
+    singleError(error) {
+        let body    = error._body;
+        let message = "";
+
+        if (body) {
+            let data = JSON.parse(body);
+
+            message = data.message;
+        }
+
+        return message;
+    }
+
 }

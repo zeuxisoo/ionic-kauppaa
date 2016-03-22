@@ -24,4 +24,11 @@ export class HomeService {
         });
     }
 
+    signIn(username, password) {
+        return this.apiService.post("home/signin", {
+            username: username,
+            password: password
+        })
+    }
+
 }
