@@ -4,17 +4,20 @@ import { ApiService } from './services/api';
 import { HomeService } from './services/home';
 import { NewsService } from './services/news';
 import { UtilsFactory } from './factories/utils';
+import { StorageFactory } from './factories/storage';
 
 @App({
     template: '<ion-nav [root]="rootPage"></ion-nav>',
-    providers: [ApiService, HomeService, NewsService, UtilsFactory],
+    providers: [ApiService, HomeService, NewsService, UtilsFactory, StorageFactory],
     config: {
         tabbarPlacement: 'bottom'
     } // http://ionicframework.com/docs/v2/api/config/Config/
 })
 export class MyApp {
     static get parameters() {
-        return [[Platform]];
+        return [
+            [Platform]
+        ];
     }
 
     constructor(platform) {

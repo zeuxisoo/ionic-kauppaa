@@ -2,31 +2,41 @@ import querystring from 'querystring';
 
 import { Http, Headers, URLSearchParams } from 'angular2/http';
 import { Injectable } from 'angular2/core';
+import { StorageFactory } from '../factories/storage';
+import { Events } from 'ionic-angular';
 
 @Injectable()
 export class ApiService {
 
     static get parameters() {
         return [
-            [Http]
+            [Http],
+            [StorageFactory],
+            [Events]
         ];
     }
 
-    constructor(http) {
-        this.http = http;
+    constructor(http, storageFactory, events) {
+        this.http           = http;
+        this.storageFactory = storageFactory;
+        this.events         = events;
 
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        let token = localStorage.getItem('token');
-
-        if (token !== "") {
-            this.headers.append('Authorization', `Bearer ${token}`);
-        }
+        this.events.subscribe('token:set', () => {
+            this.storageFactory
+                .getItem('token')
+                .then(token => {
+                    if (token !== "") {
+                        this.headers.append('Authorization', `Bearer ${token}`);
+                    }
+                });
+        });
     }
 
     api(entryPoint) {
-        return `http://localhost:8000/api/v1/${entryPoint}`;
+        return `http://10.0.1.2:8000/api/v1/${entryPoint}`;
     }
 
     queryString(dict) {

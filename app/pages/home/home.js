@@ -1,9 +1,10 @@
 import { NavController } from 'ionic-angular';
-import { Page, Alert } from 'ionic-angular';
+import { Page, Alert, Events } from 'ionic-angular';
 import { SignUpPage } from '../signup/signup';
 import { PanelPage } from '../panel/panel';
 import { HomeService } from '../../services/home';
 import { UtilsFactory } from '../../factories/utils';
+import { StorageFactory } from '../../factories/storage';
 
 @Page({
     templateUrl: 'build/pages/home/home.html'
@@ -13,15 +14,19 @@ export class HomePage {
     static get parameters() {
         return [
             [NavController],
+            [Events],
             [HomeService],
-            [UtilsFactory]
+            [UtilsFactory],
+            [StorageFactory],
         ];
     }
 
-    constructor(nav, homeService, utilsFactory) {
+    constructor(nav, events, homeService, utilsFactory, storageFactory) {
         this.nav            = nav;
+        this.events         = events;
         this.homeService    = homeService;
-        this.utilsFactory = utilsFactory;
+        this.utilsFactory   = utilsFactory;
+        this.storageFactory = storageFactory;
     }
 
     signIn(event) {
@@ -32,9 +37,13 @@ export class HomePage {
                     let token = response.token;
 
                     if (token) {
-                        localStorage.setItem('token', token);
+                        this.storageFactory
+                            .setItem('token', token)
+                            .then(() => {
+                                this.events.publish("token:set");
 
-                        this.nav.setRoot(PanelPage);
+                                this.nav.setRoot(PanelPage);
+                            });
                     }
                 },
                 error => {
