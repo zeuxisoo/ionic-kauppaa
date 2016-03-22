@@ -9,6 +9,7 @@ cordova:
 add-plugins:
 	@cordova plugin add cordova-plugin-whitelist
 	@cordova plugin add cordova-plugin-file
+	@cordova plugin add cordova-plugin-file-transfer
 
 	@ionic plugin add cordova-plugin-camera
 
