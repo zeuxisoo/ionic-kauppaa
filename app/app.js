@@ -1,8 +1,11 @@
 import { App, Platform } from 'ionic-angular';
 import { HomePage } from './pages/home/home';
+import { HomeService } from './services/home';
+import { UtilsFactories } from './factories/utils';
 
 @App({
     template: '<ion-nav [root]="rootPage"></ion-nav>',
+    providers: [HomeService, UtilsFactories],
     config: {
         tabbarPlacement: 'bottom'
     } // http://ionicframework.com/docs/v2/api/config/Config/
