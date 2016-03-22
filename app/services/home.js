@@ -1,11 +1,12 @@
+import 'rxjs/add/operator/map';
+
+import ApiService from './api';
+
 import { Injectable } from 'angular2/core';
 import { Http, Headers } from 'angular2/http';
-import { Page } from 'ionic-angular';
-import 'rxjs/add/operator/map';
-import querystring from 'querystring';
 
 @Injectable()
-export class HomeService {
+export class HomeService extends ApiService {
 
     static get parameters() {
         return [
@@ -14,24 +15,23 @@ export class HomeService {
     }
 
     constructor(http) {
-        this.http    = http;
+        super();
 
-        this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http = http;
     }
 
     signUp(username, email, password) {
-        let body = querystring.stringify({
+        let data = this.querystring({
             username: username,
             email   : email,
             password: password,
-       });
+        });
 
         return this.http
-                   .post("http://localhost:8000/api/v1/home/signup", body, {
-                        headers: this.headers
-                   })
-                   .map(response => response.json());
+                .post(this.api("home/signup"), data, {
+                    headers: this.headers
+                })
+                .map(response => response.json())
     }
 
 }
