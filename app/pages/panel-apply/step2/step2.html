@@ -6,14 +6,14 @@
                 <ion-col class="provide-header">HKID</ion-col>
             </ion-row>
             <ion-row text-center>
-                <ion-col><img src="http://placehold.it/300x300" /></ion-col>
+                <ion-col><img [src]="hkid" /></ion-col>
             </ion-row>
             <ion-row>
                 <ion-col width="50">
-                    <button full>Upload</button>
+                    <button full (click)="take('hkid')">Take Photo</button>
                 </ion-col>
                 <ion-col width="50">
-                    <button full>Pick</button>
+                    <button full (click)="pick('hkid')">Pick Photo</button>
                 </ion-col>
             </ion-row>
         </div>
@@ -23,14 +23,14 @@
                 <ion-col class="provide-header">Address</ion-col>
             </ion-row>
             <ion-row text-center>
-                <ion-col><img src="http://placehold.it/300x300" /></ion-col>
+                <ion-col><img [src]="address" /></ion-col>
             </ion-row>
             <ion-row>
                 <ion-col width="50">
-                    <button full>Upload</button>
+                    <button full (click)="take('address')">Take Photo</button>
                 </ion-col>
                 <ion-col width="50">
-                    <button full>Pick</button>
+                    <button full (click)="pick('address')">Pick Photo</button>
                 </ion-col>
             </ion-row>
         </div>
@@ -40,23 +40,32 @@
                 <ion-col class="provide-header">Income</ion-col>
             </ion-row>
             <ion-row text-center>
-                <ion-col><img src="http://placehold.it/300x300" /></ion-col>
+                <ion-col><img [src]="income"  /></ion-col>
             </ion-row>
             <ion-row>
                 <ion-col width="50">
-                    <button full>Upload</button>
+                    <button full (click)="take('income')">Take Photo</button>
                 </ion-col>
                 <ion-col width="50">
-                    <button full>Pick</button>
+                    <button full (click)="pick('income')">Pick Photo</button>
                 </ion-col>
             </ion-row>
         </div>
     </ion-list>
 
     <div padding class="step-button">
-        <button full dark (click)="step3()">
-            Next step
-            <ion-icon name="ios-arrow-forward"></ion-icon>
-        </button>
+        <ion-row>
+            <ion-col width="50">
+                <button full dark (click)="backToStep1()">
+                    <ion-icon name="ios-arrow-back"></ion-icon>
+                    Previous step
+                </button>
+            </ion-col>
+            <ion-col width="50">
+                <button full secondary (click)="submit()">
+                    Submit
+                </button>
+            </ion-col>
+        </ion-row>
     </div>
 </ion-content>
