@@ -1,8 +1,11 @@
 import { NavController } from 'ionic-angular';
-import { Page } from 'ionic-angular';
+import { Page, Alert } from 'ionic-angular';
 import { Camera, CameraOptions } from 'ionic-native';
+import { ApiService } from '../../../services/api';
+import { ApplyService } from '../../../services/apply';
 import { StepDataFactory } from '../../../factories/data';
 import { StorageFactory } from '../../../factories/storage';
+import { UtilsFactory } from '../../../factories/utils';
 
 @Page({
     templateUrl: 'build/pages/panel-apply/step2/step2.html'
@@ -12,19 +15,25 @@ export class PanelApplyStep2Page {
     static get parameters() {
         return [
             [NavController],
+            [ApiService],
+            [ApplyService],
             [StepDataFactory],
             [StorageFactory],
+            [UtilsFactory],
         ];
     }
 
-    constructor(nav, stepDataFactory, storageFactory) {
+    constructor(nav, apiService, applyService, stepDataFactory, storageFactory, utilsFactory) {
         this.nav             = nav;
+        this.apiService      = apiService;
+        this.applyService    = applyService;
         this.stepDataFactory = stepDataFactory;
         this.storageFactory  = storageFactory;
+        this.utilsFactory    = utilsFactory;
 
-        this.hkid    = "http://placehold.it/300x300";
-        this.address = "http://placehold.it/300x300";
-        this.income  = "http://placehold.it/300x300";
+        this.hkid    = "build/images/preview_for_hkid.png";
+        this.address = "build/images/preview_for_address.png";
+        this.income  = "build/images/preview_for_income.png";
     }
 
     take(type) {
@@ -61,28 +70,110 @@ export class PanelApplyStep2Page {
     }
 
     submit() {
-        this.storageFactory.getItem('token').then(token => {
-            let fileUploadOptions = new FileUploadOptions();
-            let fileTransfer      = new FileTransfer();
+        let photoFields = ['hkid', 'address', 'income'];
 
-            fileUploadOptions.fileKey     = "file";
-            fileUploadOptions.fileName    = this.hkid.substr(this.hkid.lastIndexOf('/') + 1);
-            fileUploadOptions.mimeType    = "image/jpeg";
-            fileUploadOptions.chunkedMode = false;
-            fileUploadOptions.headers     = {
-                'Connection'   : "close",
-                'Authorization': `Bearer ${token}`
-            };
-            fileUploadOptions.params      = this.stepDataFactory.getData();
+        for(let key in photoFields) {
+            if (this[photoFields[key]].startsWith('build/images/preview_for')) {
+                let alert = Alert.create({
+                    title  : 'Ooops',
+                    message: `Please take or pick ${photoFields[key]} to upload`,
+                    buttons: ['Ok']
+                });
 
-            fileTransfer.upload(this.hkid, encodeURI("http://10.0.1.2:8000/api/v1/panel/apply/create"), response => {
-                console.log('response >>');
-                console.log(response);
-            }, error => {
-                console.log('error >>');
-                console.log(error);
-            }, fileUploadOptions);
+                this.nav.present(alert);
+
+                return;
+            }
+        }
+
+        let data = this.stepDataFactory.getData();
+
+        this.applyService
+            .createStep1(data)
+            .subscribe(
+                response => {
+                    let apply = response.data;
+
+                    Promise.all([
+                        this.submitPhoto(apply.id, 'hkid'),
+                        this.submitPhoto(apply.id, 'address'),
+                        this.submitPhoto(apply.id, 'income')
+                    ]).then(
+                        values => {
+                            let alert = Alert.create({
+                                title  : 'Success',
+                                message: 'Your information has been successfully submitted. we will contact you soon.',
+                                buttons: ['Ok']
+                            });
+
+                            this.nav.present(alert);
+                        },
+                        error => {
+                            this.handleError(error);
+                            return;
+                        }
+                    );
+                },
+                error => {
+                    this.handleError(error)
+                }
+            );
+    }
+
+    submitPhoto(apply_id, category) {
+        return new Promise((resolve, reject) => {
+            this.storageFactory.getItem('token').then(token => {
+                let fileUploadOptions = new FileUploadOptions();
+                let fileTransfer      = new FileTransfer();
+                let fileUri           = this[category];
+
+                fileUploadOptions.fileKey     = "file";
+                fileUploadOptions.fileName    = fileUri.substr(fileUri.lastIndexOf('/') + 1);
+                fileUploadOptions.mimeType    = "image/jpeg";
+                fileUploadOptions.chunkedMode = false;
+                fileUploadOptions.headers     = {
+                    'Connection'   : "close",
+                    'Authorization': `Bearer ${token}`
+                };
+                fileUploadOptions.params      = {
+                    apply_id: apply_id,
+                    category: category
+                };
+
+                fileTransfer.upload(fileUri, encodeURI(this.apiService.api("panel/apply/create/step2")), response => {
+                    resolve(response);
+                }, error => {
+                    reject(error);
+                }, fileUploadOptions);
+            });
         });
+    }
+
+    handleError(error) {
+        // Handle for FileTransferError without error._body
+        if (!error._body && error.body) {
+            error._body = error.body;
+        }
+
+        let firstError  = this.utilsFactory.firstError(error);
+        let singleError = this.utilsFactory.singleError(error);
+        let message     = "";
+
+        if (firstError !== "") {
+            message = firstError;
+        }else{
+            message = singleError;
+        }
+
+        if (message !== "") {
+            let alert = Alert.create({
+                title  : 'Oops',
+                message: message,
+                buttons: ['Ok']
+            });
+
+            this.nav.present(alert);
+        }
     }
 
 }

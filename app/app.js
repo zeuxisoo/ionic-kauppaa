@@ -3,13 +3,14 @@ import { HomePage } from './pages/home/home';
 import { ApiService } from './services/api';
 import { HomeService } from './services/home';
 import { NewsService } from './services/news';
+import { ApplyService } from './services/apply';
 import { UtilsFactory } from './factories/utils';
 import { StorageFactory } from './factories/storage';
 import { StepDataFactory } from './factories/data';
 
 @App({
     template: '<ion-nav [root]="rootPage"></ion-nav>',
-    providers: [ApiService, HomeService, NewsService, UtilsFactory, StorageFactory, StepDataFactory],
+    providers: [ApiService, HomeService, NewsService, ApplyService, UtilsFactory, StorageFactory, StepDataFactory],
     config: {
         tabbarPlacement: 'bottom'
     } // http://ionicframework.com/docs/v2/api/config/Config/
