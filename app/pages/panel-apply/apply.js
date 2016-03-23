@@ -10,8 +10,4 @@ export class PanelApplyPage {
         this.rootPage = PanelApplyStep1Page;
     }
 
-    trash() {
-        console.log('trash clicked');
-    }
-
 }
