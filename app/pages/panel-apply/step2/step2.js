@@ -34,6 +34,8 @@ export class PanelApplyStep2Page {
         this.hkid    = "build/images/preview_for_hkid.png";
         this.address = "build/images/preview_for_address.png";
         this.income  = "build/images/preview_for_income.png";
+
+        this.submitText = "Submit";
     }
 
     take(type) {
@@ -88,6 +90,8 @@ export class PanelApplyStep2Page {
 
         let data = this.stepDataFactory.getData();
 
+        this.submitText = "Submitting";
+
         this.applyService
             .createStep1(data)
             .subscribe(
@@ -116,7 +120,8 @@ export class PanelApplyStep2Page {
                 },
                 error => {
                     this.handleError(error)
-                }
+                },
+                () => this.submitText = "Submit"
             );
     }
 
