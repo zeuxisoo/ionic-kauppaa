@@ -36,7 +36,7 @@ export class ApiService {
     }
 
     api(entryPoint) {
-        return `http://10.0.1.2:8000/api/v1/${entryPoint}`;
+        return `https://ku.comma.party/api/v1/${entryPoint}`;
     }
 
     queryString(dict) {
